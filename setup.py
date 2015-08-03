@@ -39,7 +39,7 @@ setup(
         "Programming Language :: Python",
         "Natural Language :: English",
         "Intended Audience :: Developers",
-        "Operation System :: OS Independent",
+        "Operating System :: OS Independent",
         "Development Status :: 3 - Alpha",
         "Topic :: Utilities",
         "License :: OSI Approved :: BSD License",
