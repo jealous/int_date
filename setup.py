@@ -40,7 +40,7 @@ setup(
         "Natural Language :: English",
         "Intended Audience :: Developers",
         "Operating System :: OS Independent",
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 4 - Beta",
         "Topic :: Utilities",
         "License :: OSI Approved :: BSD License",
     ],
