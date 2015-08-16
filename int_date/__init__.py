@@ -15,8 +15,8 @@ def _from_str(date_str, format_str=None):
 
 
 def get_date_from_int(int_date):
-    """
-    Convert a int date to a datetime instance
+    """Convert a ``int`` date to a :class:`datetime` instance
+
     :param int_date: int number which represents a date
     :return: datetime instance of the date
     """
@@ -25,12 +25,12 @@ def get_date_from_int(int_date):
 
 
 def get_int_day_interval(int_left, int_right):
-    """
-    get interval (in day) between two int dates
+    """get interval (in day) between two int dates
+
     :param int_left: first int date
     :param int_right:  second int date
     :return: difference (in day), negative if second date is earlier
-    than the first one.
+             than the first one.
     """
     left_date = get_date_from_int(int_left)
     right_date = get_date_from_int(int_right)
@@ -39,8 +39,8 @@ def get_int_day_interval(int_left, int_right):
 
 
 def get_date_from_diff(i_date, delta_day):
-    """
-    calculate new int date with a start date and a diff (in days)
+    """calculate new int date with a start date and a diff (in days)
+
     :param i_date: the starting date
     :param delta_day: diff (in days), negative means past
     :return: result date
@@ -51,14 +51,15 @@ def get_date_from_diff(i_date, delta_day):
 
 
 def to_int_date(the_day):
-    """
-    Convert a datetime object or a int str to a int date
+    """Convert a datetime object or a int str to a int date
+
     int str could be one of the following format:
     2015-01-30
     2015/01/30
+
     :param the_day: datetime,date instance or string
+    :exception: ValueError if input could not be converted
     :return: int date
-    :exception ValueError if input could not be converted
     """
     if isinstance(the_day, str):
         the_day = _convert_date(the_day)
@@ -71,8 +72,8 @@ def to_int_date(the_day):
 
 
 def today():
-    """
-    Get the today of int date
+    """Get the today of int date
+
     :return: int date of today
     """
     the_day = date.today()
@@ -80,7 +81,8 @@ def today():
 
 
 def _convert_date(date_str):
-    """
+    """convert a *date_str* to int date
+
     convert string '2015-01-30' to int 20150130
     convert string '2015/01/30' to int 20150130
     :return: int format of date
@@ -95,8 +97,8 @@ def _convert_date(date_str):
 
 
 def in_year(day, years):
-    """
-    check if day is in years list or year
+    """check if day is in years list or year
+
     :param day: date
     :param years: list of years or year
     :return: true if in, otherwise false
@@ -106,8 +108,8 @@ def in_year(day, years):
 
 
 def in_month(day, months):
-    """
-    check if day is in months list or month
+    """check if day is in months list or month
+
     :param day: date
     :param months: list of months or month
     :return: true if in, otherwise false
@@ -117,8 +119,8 @@ def in_month(day, months):
 
 
 def in_date(day, dates):
-    """
-    check if day is in dates list or date
+    """check if day is in dates list or date
+
     :param day: date
     :param dates: list of dates or date
     :return: true if in, otherwise false
