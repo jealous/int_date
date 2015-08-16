@@ -10,3 +10,6 @@ script:
     - "tox -e py34"
 after_success:
     - coveralls
+notifications:
+    email:
+        - jealous@163.com
