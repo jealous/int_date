@@ -49,6 +49,10 @@ class TestIntDate(TestCase):
         date = int_date.to_int_date('2015/11/23')
         assert_that(date, equal_to(20151123))
 
+    def test_to_int_date_unicode(self):
+        date = int_date.to_int_date(u'2015/11/23')
+        assert_that(date, equal_to(20151123))
+
     def test_to_int_date_str_error(self):
         with self.assertRaises(ValueError):
             int_date.to_int_date('20151301')
