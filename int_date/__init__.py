@@ -51,23 +51,25 @@ def get_date_from_diff(i_date, delta_day):
 
 
 def to_int_date(the_day):
-    """Convert a datetime object or a int str to a int date
+    """Convert a datetime object or a str/unicode to a int date
 
-    int str could be one of the following format:
+    A int str could be one of the following format:
     2015-01-30
     2015/01/30
+
 
     :param the_day: datetime,date instance or string
     :exception: ValueError if input could not be converted
     :return: int date
     """
-    if isinstance(the_day, str):
+    if isinstance(the_day, str) or isinstance(the_day, unicode):
         the_day = _convert_date(the_day)
 
     if isinstance(the_day, datetime) or isinstance(the_day, date):
         ret = the_day.year * 10000 + the_day.month * 100 + the_day.day
     else:
-        raise ValueError("input should be a datetime/date instance.")
+        raise ValueError("input should be a datetime/"
+                         "date/str/unicode instance.")
     return ret
 
 
