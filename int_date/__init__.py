@@ -2,7 +2,7 @@ from datetime import datetime, timedelta, date
 import sys
 
 __author__ = 'Cedric Zhuang'
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 
 
 def _from_str(date_str, format_str=None):
