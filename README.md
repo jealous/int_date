@@ -9,5 +9,8 @@ First four digits are year.  Next two are month.  Last two are date.
 To file issue, please visit:
 httsp://github.com/jealous/int_date
 
+Documentation for the package is available at:
+http://int-date.readthedocs.org/en/latest/int_date.html
+
 Contact author:
 cedric.zhuang@gmail.com

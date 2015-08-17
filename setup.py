@@ -1,4 +1,5 @@
 from setuptools import setup
+from pip.req import parse_requirements
 import io
 import os
 import int_date
@@ -23,6 +24,9 @@ def read(*filenames, **kwargs):
     return sep.join(buf)
 
 
+requirements = parse_requirements('requirements.txt', session=False)
+
+
 setup(
     name="int_date",
     version=int_date.__version__,
@@ -44,5 +48,6 @@ setup(
         "Topic :: Utilities",
         "License :: OSI Approved :: BSD License",
     ],
+    install_requires=[str(ir.req) for ir in requirements],
     tests_require=['pytest', 'pyhamcrest']
 )
