@@ -62,22 +62,22 @@ class TestIntDate(TestCase):
             int_date.to_int_date(None)
 
     def test_in_month(self):
-        assert_that(int_date.in_month(20140503, [3, 5, 7]), equal_to(True))
-        assert_that(int_date.in_month(20140503, {3, 5, 7}), equal_to(True))
-        assert_that(int_date.in_month(20140503, (3, 5, 7)), equal_to(True))
-        assert_that(int_date.in_month(20140131, [3, 5, 7]), equal_to(False))
+        assert_that(int_date.in_month(20140503, *[3, 5, 7]), equal_to(True))
+        assert_that(int_date.in_month(20140503, *{3, 5, 7}), equal_to(True))
+        assert_that(int_date.in_month(20140503, *(3, 5, 7)), equal_to(True))
+        assert_that(int_date.in_month(20140131, *[3, 5, 7]), equal_to(False))
         assert_that(int_date.in_month(20140131, 1), equal_to(True))
         assert_that(int_date.in_month(20140131, 3), equal_to(False))
 
     def test_in_date(self):
-        assert_that(int_date.in_date(20140503, [3, 5, 7]), equal_to(True))
-        assert_that(int_date.in_date(20140503, {1, 5, 7}), equal_to(False))
+        assert_that(int_date.in_date(20140503, *[3, 5, 7]), equal_to(True))
+        assert_that(int_date.in_date(20140503, *{1, 5, 7}), equal_to(False))
         assert_that(int_date.in_date(20140131, 31), equal_to(True))
         assert_that(int_date.in_date(20140131, 30), equal_to(False))
 
     def test_in_year(self):
-        assert_that(int_date.in_year(20140503, [2013, 2014]), equal_to(True))
-        assert_that(int_date.in_year(20140503, {2013, 2015}), equal_to(False))
+        assert_that(int_date.in_year(20140503, *[2013, 2014]), equal_to(True))
+        assert_that(int_date.in_year(20140503, *{2013, 2015}), equal_to(False))
         assert_that(int_date.in_year(20140131, 2014), equal_to(True))
         assert_that(int_date.in_year(20140131, 2013), equal_to(False))
 

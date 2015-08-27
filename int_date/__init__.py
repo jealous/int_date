@@ -2,7 +2,7 @@ from datetime import datetime, timedelta, date
 import six
 
 __author__ = 'Cedric Zhuang'
-__version__ = '0.1.1'
+__version__ = '0.1.3'
 
 
 def _from_str(date_str, format_str=None):
@@ -99,7 +99,7 @@ def _convert_date(date_str):
     return ret
 
 
-def in_year(day, years):
+def in_year(day, *years):
     """check if day is in years list or year
 
     :param day: date
@@ -110,7 +110,7 @@ def in_year(day, years):
     return _in_range_or_equal(year, years)
 
 
-def in_month(day, months):
+def in_month(day, *months):
     """check if day is in months list or month
 
     :param day: date
@@ -121,7 +121,7 @@ def in_month(day, months):
     return _in_range_or_equal(month, months)
 
 
-def in_date(day, dates):
+def in_date(day, *dates):
     """check if day is in dates list or date
 
     :param day: date
@@ -133,8 +133,4 @@ def in_date(day, dates):
 
 
 def _in_range_or_equal(value, to_compare):
-    if hasattr(to_compare, '__iter__'):
-        ret = value in to_compare
-    else:
-        ret = value == to_compare
-    return ret
+    return value in to_compare

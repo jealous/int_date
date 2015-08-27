@@ -27,6 +27,16 @@ def read(*filenames, **kwargs):
 requirements = parse_requirements('requirements.txt', session=False)
 
 
+def get_long_description():
+    filename = 'README.md'
+    try:
+        import pypandoc
+        ret = pypandoc.convert(filename, 'rst')
+    except ImportError:
+        ret = read(filename)
+    return ret
+
+
 setup(
     name="int_date",
     version=int_date.__version__,
@@ -38,7 +48,7 @@ setup(
     url="http://github.com/jealous/int_date",
     packages=['int_date'],
     platforms=['any'],
-    long_description=read('README.md'),
+    long_description=get_long_description(),
     classifiers=[
         "Programming Language :: Python",
         "Natural Language :: English",
