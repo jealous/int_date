@@ -1,8 +1,8 @@
 from datetime import datetime, timedelta, date
-import sys
+import six
 
 __author__ = 'Cedric Zhuang'
-__version__ = '0.1.0'
+__version__ = '0.1.3'
 
 
 def _from_str(date_str, format_str=None):
@@ -63,14 +63,8 @@ def to_int_date(the_day):
     :exception: ValueError if input could not be converted
     :return: int date
     """
-    if sys.version_info >= (3, 0, 0):
-        # for Python 3
-        if isinstance(the_day, str):
-            the_day = _convert_date(the_day)
-    else:
-        # for Python 2
-        if isinstance(the_day, basestring):
-            the_day = _convert_date(the_day)
+    if isinstance(the_day, six.string_types):
+        the_day = _convert_date(the_day)
 
     if isinstance(the_day, datetime) or isinstance(the_day, date):
         ret = the_day.year * 10000 + the_day.month * 100 + the_day.day
@@ -105,7 +99,7 @@ def _convert_date(date_str):
     return ret
 
 
-def in_year(day, years):
+def in_year(day, *years):
     """check if day is in years list or year
 
     :param day: date
@@ -116,7 +110,7 @@ def in_year(day, years):
     return _in_range_or_equal(year, years)
 
 
-def in_month(day, months):
+def in_month(day, *months):
     """check if day is in months list or month
 
     :param day: date
@@ -127,7 +121,7 @@ def in_month(day, months):
     return _in_range_or_equal(month, months)
 
 
-def in_date(day, dates):
+def in_date(day, *dates):
     """check if day is in dates list or date
 
     :param day: date
@@ -139,8 +133,4 @@ def in_date(day, dates):
 
 
 def _in_range_or_equal(value, to_compare):
-    if hasattr(to_compare, '__iter__'):
-        ret = value in to_compare
-    else:
-        ret = value == to_compare
-    return ret
+    return value in to_compare

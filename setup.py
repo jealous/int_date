@@ -1,4 +1,5 @@
 from setuptools import setup
+from pip.req import parse_requirements
 import io
 import os
 import int_date
@@ -23,6 +24,19 @@ def read(*filenames, **kwargs):
     return sep.join(buf)
 
 
+requirements = parse_requirements('requirements.txt', session=False)
+
+
+def get_long_description():
+    filename = 'README.md'
+    try:
+        import pypandoc
+        ret = pypandoc.convert(filename, 'rst')
+    except ImportError:
+        ret = read(filename)
+    return ret
+
+
 setup(
     name="int_date",
     version=int_date.__version__,
@@ -34,7 +48,7 @@ setup(
     url="http://github.com/jealous/int_date",
     packages=['int_date'],
     platforms=['any'],
-    long_description=read('README.md'),
+    long_description=get_long_description(),
     classifiers=[
         "Programming Language :: Python",
         "Natural Language :: English",
@@ -44,5 +58,6 @@ setup(
         "Topic :: Utilities",
         "License :: OSI Approved :: BSD License",
     ],
+    install_requires=[str(ir.req) for ir in requirements],
     tests_require=['pytest', 'pyhamcrest']
 )
