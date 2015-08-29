@@ -2,7 +2,7 @@ from datetime import datetime, timedelta, date
 import six
 
 __author__ = 'Cedric Zhuang'
-__version__ = '0.1.3'
+__version__ = '0.1.4'
 
 
 def _from_str(date_str, format_str=None):
@@ -63,14 +63,19 @@ def to_int_date(the_day):
     :exception: ValueError if input could not be converted
     :return: int date
     """
-    if isinstance(the_day, six.string_types):
-        the_day = _convert_date(the_day)
-
-    if isinstance(the_day, datetime) or isinstance(the_day, date):
-        ret = the_day.year * 10000 + the_day.month * 100 + the_day.day
+    if the_day is None:
+        ret = None
     else:
-        raise ValueError("input should be a datetime/"
-                         "date/str/unicode instance.")
+        if isinstance(the_day, six.string_types):
+            the_day = _convert_date(the_day)
+
+        if isinstance(the_day, datetime) or isinstance(the_day, date):
+            ret = the_day.year * 10000 + the_day.month * 100 + the_day.day
+        elif isinstance(the_day, six.integer_types):
+            ret = the_day
+        else:
+            raise ValueError("input should be a datetime/"
+                             "date/str/unicode instance.")
     return ret
 
 

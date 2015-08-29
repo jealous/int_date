@@ -1,6 +1,6 @@
 from unittest import TestCase
 import datetime
-from hamcrest import assert_that, equal_to, greater_than
+from hamcrest import assert_that, equal_to, greater_than, none
 import int_date
 
 __author__ = 'Cedric Zhuang'
@@ -41,6 +41,14 @@ class TestIntDate(TestCase):
         date = int_date.to_int_date(datetime.datetime(2015, 5, 21))
         assert_that(date, equal_to(20150521))
 
+    def test_to_int_date_int_input(self):
+        date = int_date.to_int_date(19831102)
+        assert_that(date, equal_to(19831102))
+
+    def test_to_int_date_none(self):
+        date = int_date.to_int_date(None)
+        assert_that(date, none())
+
     def test_to_int_date_str_1(self):
         date = int_date.to_int_date('2015-1-3')
         assert_that(date, equal_to(20150103))
@@ -56,10 +64,6 @@ class TestIntDate(TestCase):
     def test_to_int_date_str_error(self):
         with self.assertRaises(ValueError):
             int_date.to_int_date('20151301')
-
-    def test_date_to_int_none(self):
-        with self.assertRaises(ValueError):
-            int_date.to_int_date(None)
 
     def test_in_month(self):
         assert_that(int_date.in_month(20140503, *[3, 5, 7]), equal_to(True))
