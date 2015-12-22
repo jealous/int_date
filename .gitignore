@@ -1,6 +1,7 @@
 # Binaries
 *.pyc
 .tox/
+.cache/
 .env/
 build/
 dist/
