@@ -1,8 +1,9 @@
 from datetime import datetime, timedelta, date
+from dateutil import rrule
 import six
 
 __author__ = 'Cedric Zhuang'
-__version__ = '0.1.3'
+__version__ = '0.1.5'
 
 
 def _from_str(date_str, format_str=None):
@@ -39,6 +40,28 @@ def get_int_day_interval(int_left, int_right):
     return delta.days
 
 
+def get_workdays(int_left, int_right):
+    """get the number of business days between two int dates.
+
+    :param int_left: first int date
+    :param int_right:  second int date
+    :return: business days, negative if second date is earlier
+             than the first one.
+    """
+    reverse = False
+    if int_left > int_right:
+        reverse = True
+        int_left, int_right = int_right, int_left
+    date_start_obj = to_date(int_left)
+    date_end_obj = to_date(int_right)
+    weekdays = rrule.rrule(rrule.DAILY, byweekday=range(0, 5),
+                           dtstart=date_start_obj, until=date_end_obj)
+    weekdays = len(list(weekdays))
+    if reverse:
+        weekdays = -weekdays
+    return weekdays
+
+
 def get_date_from_diff(i_date, delta_day):
     """calculate new int date with a start date and a diff (in days)
 
@@ -63,15 +86,28 @@ def to_int_date(the_day):
     :exception: ValueError if input could not be converted
     :return: int date
     """
-    if isinstance(the_day, six.string_types):
-        the_day = _convert_date(the_day)
-
-    if isinstance(the_day, datetime) or isinstance(the_day, date):
-        ret = the_day.year * 10000 + the_day.month * 100 + the_day.day
+    if the_day is None:
+        ret = None
     else:
-        raise ValueError("input should be a datetime/"
-                         "date/str/unicode instance.")
+        if isinstance(the_day, six.string_types):
+            the_day = _convert_date(the_day)
+
+        if isinstance(the_day, datetime) or isinstance(the_day, date):
+            ret = the_day.year * 10000 + the_day.month * 100 + the_day.day
+        elif isinstance(the_day, six.integer_types):
+            ret = the_day
+        else:
+            raise ValueError("input should be a datetime/"
+                             "date/str/unicode instance.")
     return ret
+
+
+def to_date(int_day):
+    day = int_day % 100
+    month = (int_day % 10000 - day) / 100
+    year = int_day / 10000
+
+    return date(int(year), int(month), int(day))
 
 
 def today():
