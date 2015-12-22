@@ -88,3 +88,8 @@ class TestIntDate(TestCase):
     def test_today(self):
         today = int_date.today()
         assert_that(today, greater_than(20150504))
+
+    def test_get_workdays(self):
+        assert_that(int_date.get_workdays(20151202, 20151213), equal_to(8))
+        assert_that(int_date.get_workdays(20151213, 20151202), equal_to(-8))
+        assert_that(int_date.get_workdays(20151223, 20160105), equal_to(10))

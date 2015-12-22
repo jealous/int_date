@@ -1,8 +1,9 @@
 from datetime import datetime, timedelta, date
+from dateutil import rrule
 import six
 
 __author__ = 'Cedric Zhuang'
-__version__ = '0.1.4'
+__version__ = '0.1.5'
 
 
 def _from_str(date_str, format_str=None):
@@ -37,6 +38,28 @@ def get_int_day_interval(int_left, int_right):
     right_date = get_date_from_int(int_right)
     delta = right_date - left_date
     return delta.days
+
+
+def get_workdays(int_left, int_right):
+    """get the number of business days between two int dates.
+
+    :param int_left: first int date
+    :param int_right:  second int date
+    :return: business days, negative if second date is earlier
+             than the first one.
+    """
+    reverse = False
+    if int_left > int_right:
+        reverse = True
+        int_left, int_right = int_right, int_left
+    date_start_obj = to_date(int_left)
+    date_end_obj = to_date(int_right)
+    weekdays = rrule.rrule(rrule.DAILY, byweekday=range(0, 5),
+                           dtstart=date_start_obj, until=date_end_obj)
+    weekdays = len(list(weekdays))
+    if reverse:
+        weekdays = -weekdays
+    return weekdays
 
 
 def get_date_from_diff(i_date, delta_day):
@@ -77,6 +100,14 @@ def to_int_date(the_day):
             raise ValueError("input should be a datetime/"
                              "date/str/unicode instance.")
     return ret
+
+
+def to_date(int_day):
+    day = int_day % 100
+    month = (int_day % 10000 - day) / 100
+    year = int_day / 10000
+
+    return date(int(year), int(month), int(day))
 
 
 def today():
