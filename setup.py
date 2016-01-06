@@ -2,9 +2,10 @@ from setuptools import setup
 from pip.req import parse_requirements
 import io
 import os
-import int_date
 
 __author__ = 'Cedric Zhuang'
+
+__version__ = '0.1.7'
 
 
 def here(filename=None):
@@ -24,7 +25,9 @@ def read(*filenames, **kwargs):
     return sep.join(buf)
 
 
-requirements = parse_requirements('requirements.txt', session=False)
+def get_requires(filename):
+    requirements = parse_requirements(filename, session=False)
+    return [str(ir.req) for ir in requirements]
 
 
 def get_long_description():
@@ -39,7 +42,7 @@ def get_long_description():
 
 setup(
     name="int_date",
-    version=int_date.__version__,
+    version=__version__,
     author="Cedric Zhuang",
     author_email="cedric.zhuang@gmail.com",
     description="Utility for int date like 20150312.",
@@ -58,6 +61,6 @@ setup(
         "Topic :: Utilities",
         "License :: OSI Approved :: BSD License",
     ],
-    install_requires=[str(ir.req) for ir in requirements],
-    tests_require=['pytest', 'pyhamcrest']
+    install_requires=get_requires('requirements.txt'),
+    tests_require=get_requires('test-requirements.txt')
 )

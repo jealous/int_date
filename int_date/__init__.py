@@ -3,7 +3,6 @@ from dateutil import rrule
 import six
 
 __author__ = 'Cedric Zhuang'
-__version__ = '0.1.5'
 
 
 def _from_str(date_str, format_str=None):
