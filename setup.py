@@ -1,11 +1,15 @@
 from setuptools import setup
-from pip.req import parse_requirements
 import io
 import os
+import re
 
 __author__ = 'Cedric Zhuang'
 
-__version__ = '0.1.7'
+
+def version():
+    desc = get_long_description()
+    ret = re.findall(r'VERSION: (.*)', desc)[0]
+    return ret.strip()
 
 
 def here(filename=None):
@@ -25,24 +29,19 @@ def read(*filenames, **kwargs):
     return sep.join(buf)
 
 
-def get_requires(filename):
-    requirements = parse_requirements(filename, session=False)
-    return [str(ir.req) for ir in requirements]
+def read_requirements(filename):
+    with open(filename) as f:
+        return f.read().splitlines()
 
 
 def get_long_description():
-    filename = 'README.md'
-    try:
-        import pypandoc
-        ret = pypandoc.convert(filename, 'rst')
-    except ImportError:
-        ret = read(filename)
-    return ret
+    filename = 'README.rst'
+    return read(filename)
 
 
 setup(
     name="int_date",
-    version=__version__,
+    version=version(),
     author="Cedric Zhuang",
     author_email="cedric.zhuang@gmail.com",
     description="Utility for int date like 20150312.",
@@ -61,6 +60,6 @@ setup(
         "Topic :: Utilities",
         "License :: OSI Approved :: BSD License",
     ],
-    install_requires=get_requires('requirements.txt'),
-    tests_require=get_requires('test-requirements.txt')
+    install_requires=read_requirements('requirements.txt'),
+    tests_require=read_requirements('test-requirements.txt')
 )
