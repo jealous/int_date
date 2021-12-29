@@ -1,11 +1,13 @@
 Integer Date utilities
 ======================
 
-.. image:: https://travis-ci.org/jealous/int_date.svg
-    :target: https://travis-ci.org/jealous/int_date
+.. image:: https://img.shields.io/github/workflow/status/jealous/int_date/build-test
+    :target: https://github.com/jealous/int_date/actions/workflows/build-test.yml
 
-.. image:: https://coveralls.io/repos/jealous/int_date/badge.svg
-    :target: https://coveralls.io/github/jealous/int_date
+
+.. image:: https://codecov.io/gh/jealous/int_date/branch/master/graph/badge.svg?token=GBRWXbRgYm
+    :target: https://codecov.io/gh/jealous/int_date
+
     
 VERSION: 0.1.8
 
