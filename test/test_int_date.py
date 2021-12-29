@@ -45,6 +45,10 @@ class TestIntDate(TestCase):
         date = int_date.to_int_date(19831102)
         assert_that(date, equal_to(19831102))
 
+    def test_new_int_date(self):
+        date = int_date.new('2015-1-3')
+        assert_that(date, equal_to(20150103))
+
     def test_to_int_date_none(self):
         date = int_date.to_int_date(None)
         assert_that(date, none())

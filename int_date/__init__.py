@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta, date
-from dateutil import rrule
+
 import six
+from dateutil import rrule
 
 __author__ = 'Cedric Zhuang'
 
@@ -73,8 +74,18 @@ def get_date_from_diff(i_date, delta_day):
     return to_int_date(d)
 
 
+def new(the_day):
+    """ A wrapper for the ``to_int_date`` function
+
+    :param the_day: datetime,date instance or string
+    :exception: ValueError if input could not be converted
+    :return: int date
+    """
+    return to_int_date(the_day)
+
+
 def to_int_date(the_day):
-    """Convert a datetime object or a str/unicode to a int date
+    """Convert a datetime object or a str/unicode to an int date
 
     A int str could be one of the following format:
     2015-01-30
