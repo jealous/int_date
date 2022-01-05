@@ -35,7 +35,7 @@ def read_requirements(filename):
 
 
 def get_long_description():
-    filename = 'README.rst'
+    filename = 'README.md'
     return read(filename)
 
 
@@ -47,8 +47,8 @@ setup(
     description="Utility for int date like 20150312.",
     license="BSD",
     keywords="date integer",
-    url="http://github.com/jealous/int_date",
-    packages=['int_date'],
+    url="https://github.com/jealous/int_date",
+    py_modules=['int_date'],
     platforms=['any'],
     long_description=get_long_description(),
     classifiers=[
@@ -61,5 +61,6 @@ setup(
         "License :: OSI Approved :: BSD License",
     ],
     install_requires=read_requirements('requirements.txt'),
-    tests_require=read_requirements('test-requirements.txt')
+    tests_require=read_requirements('test-requirements.txt'),
+    long_description_content_type='text/markdown',
 )
