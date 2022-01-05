@@ -1,11 +1,17 @@
-name: build-test
-on: [push, pull_request]
+name: Build and Test
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.9", "3.10"]
+        python-version: ["2.7", "3.9", "3.10"]
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python ${{ matrix.python-version }}
@@ -21,11 +27,12 @@ jobs:
           pip install -r test-requirements.txt
           pip install codecov
       - name: Check Formats with flake8
-        run: flake8 int_date test
+        run: flake8 int_date.py test.py setup.py
       - name: Run Tests
         run: |
-          py.test --cov=int_date test
+          py.test --cov=int_date test.py
       - name: Publish Test Results
+        if: ${{ matrix.python-version == '3.10' }}
         run: codecov
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

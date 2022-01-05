@@ -35,7 +35,7 @@ def read_requirements(filename):
 
 
 def get_long_description():
-    filename = 'README.rst'
+    filename = 'README.md'
     return read(filename)
 
 
@@ -47,7 +47,7 @@ setup(
     description="Utility for int date like 20150312.",
     license="BSD",
     keywords="date integer",
-    url="http://github.com/jealous/int_date",
+    url="https://github.com/jealous/int_date",
     packages=['int_date'],
     platforms=['any'],
     long_description=get_long_description(),
