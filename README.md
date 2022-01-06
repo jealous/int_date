@@ -23,7 +23,7 @@ cedric.zhuang@gmail.com
 
 ## API Document
 
-###`int_date`
+### `int_date`
 
 Converts the input to an integer that represents a date.
 
